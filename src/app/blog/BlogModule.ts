@@ -2,18 +2,20 @@ import { NgModule } from "@angular/core";
 import { PostService } from './service/PostService';
 import { PostResource } from './service/PostResource';
 import { PostListModule } from './list/PostListModule';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     imports:[
-        PostListModule
+        PostListModule,
+        HttpClientModule,
     ],
     exports: [
-        PostListModule
+        PostListModule,
     ],
     declarations: [],
     providers:[
         PostService,
-        PostResource
+        PostResource,
     ],
 })
 export class BlogModule{
