@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { PostService } from '../services/PostService';
 import { Observable } from 'rxjs';
 import { PostListItem } from '../services/dataModel/PostListItem';
+import {MatDialog} from '@angular/material/dialog';
+import { CreatePostDialogComponent } from '../dialogs/CreatePostDialogComponent';
 @Component({
     selector: 'app-post-list',
     templateUrl: 'postList.html',
@@ -9,12 +11,19 @@ import { PostListItem } from '../services/dataModel/PostListItem';
 
 export class PostListComponent implements OnInit{
     public postList: Observable<PostListItem[]> ;
+
     public displayedColumns: string[] = ['id','title','subTitle','imageUrl',]
     
-    constructor(private postService: PostService){
+    constructor(private postService: PostService,
+                private matDialog: MatDialog){
     }
     
     ngOnInit(){
         this.postList = this.postService.getAllPostItems();
+    }
+    public createPost(){
+        this.matDialog.open(CreatePostDialogComponent, {
+            width: '600px',
+        });
     }
 }
