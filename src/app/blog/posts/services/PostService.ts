@@ -3,8 +3,8 @@ import {ApiConfig} from '../../ApiConfig';
 import {HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PostResource } from './PostResource';
-import { PostListItem } from './dataModel/PostListItem';
 import { CreatePostDto } from './dataModel/CreatePostDto';
+import { PostDto } from './dataModel/PostDto';
 
 @Injectable()
 export class PostService{
@@ -13,10 +13,10 @@ export class PostService{
         
     }
     
-    public getAllPostItems(): Observable<PostListItem[]>{
+    public getAllPostItems(): Observable<PostDto[]>{
         return this.postResource.findAll();
     }
-    public createPost(createPostDto: CreatePostDto): Observable<CreatePostDto>{
+    public createPost(createPostDto: CreatePostDto): Observable<PostDto>{
         return this.postResource.create(createPostDto);
     }
 }
