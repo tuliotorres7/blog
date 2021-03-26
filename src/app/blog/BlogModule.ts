@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 
 import { HttpClientModule } from '@angular/common/http';
 import {PostsModule} from './posts/PostModule';
+import { ConfirmationDialogComponent } from './dialogs/ConfirmationDialogComponent';
 
 
 @NgModule({
@@ -12,7 +13,12 @@ import {PostsModule} from './posts/PostModule';
     exports: [
         PostsModule,
     ],
-    declarations: [],
+    declarations: [
+        ConfirmationDialogComponent,
+    ],
+    entryComponents: [
+        ConfirmationDialogComponent,
+    ]
     
 })
 export class BlogModule{

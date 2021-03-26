@@ -7,6 +7,7 @@ import { PostDto } from '../services/dataModel/PostDto';
 import { finalize } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { EditPostDto } from '../services/dataModel/EditPostDto';
+import { ConfirmationDialogComponent } from '../../dialogs/ConfirmationDialogComponent';
 @Component({
     selector: 'app-post-list',
     templateUrl: 'postList.html',
@@ -16,7 +17,7 @@ import { EditPostDto } from '../services/dataModel/EditPostDto';
 export class PostListComponent implements OnInit{
     public postList: Observable<PostDto[]> ;
     public isLoading = false;
-    public displayedColumns: string[] = ['id','title','subTitle','imageUrl',]
+    public displayedColumns: string[] = ['id','title','subTitle','imageUrl','action']
     
     private postListSubject: BehaviorSubject<PostDto[]> = new BehaviorSubject(null);
 
@@ -52,6 +53,10 @@ export class PostListComponent implements OnInit{
             }
 
         });
+    }
+
+    public deletePost(postDto: PostDto){
+        const ref= this.matDialog.open(ConfirmationDialogComponent);
     }
 
     public createPost(){
