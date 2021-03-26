@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PostDto } from './dataModel/PostDto';
 import { CreatePostDto } from './dataModel/CreatePostDto';
+import { EditPostDto } from './dataModel/EditPostDto';
 
 @Injectable()
 export class PostResource{
@@ -18,5 +19,9 @@ export class PostResource{
 
     public create(createPostDto: CreatePostDto): Observable<CreatePostDto>{
         return this.httpClient.post(this.URL, createPostDto) as Observable<CreatePostDto>;
+    }
+
+    public edit(editPostDto: EditPostDto): Observable<PostDto>{
+        return this.httpClient.put(this.URL, editPostDto) as Observable<PostDto>;
     }
 }

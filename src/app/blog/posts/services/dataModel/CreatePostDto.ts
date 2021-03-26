@@ -1,5 +1,5 @@
 export interface CreatePostDto{
-    id: string;
+    id: number;
     title: string;
     subTitle: string;
     imageUrl:string;

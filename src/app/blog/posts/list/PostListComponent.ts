@@ -6,9 +6,11 @@ import { CreatePostDialogComponent } from '../dialogs/CreatePostDialogComponent'
 import { PostDto } from '../services/dataModel/PostDto';
 import { finalize } from 'rxjs/operators';
 import * as _ from 'lodash';
+import { EditPostDto } from '../services/dataModel/EditPostDto';
 @Component({
     selector: 'app-post-list',
     templateUrl: 'postList.html',
+    styleUrls: ['postList.scss']
 })
 
 export class PostListComponent implements OnInit{
@@ -34,6 +36,24 @@ export class PostListComponent implements OnInit{
         return this.postListSubject.asObservable();
     }
 
+    public editPost(editPost: EditPostDto){
+        const ref = this.matDialog.open(CreatePostDialogComponent,{
+            width: '600px',
+            data: {editPostDto: editPost}
+        });
+        
+        ref.afterClosed().subscribe((editedPost: PostDto)=>{
+            if(editedPost){
+                const list = this.postListSubject.getValue();
+                const postIndex = _.findIndex(list,post => post.id === editedPost.id);
+                list[postIndex] = editedPost;
+                
+                this.postListSubject.next(_.cloneDeep(list));
+            }
+
+        });
+    }
+
     public createPost(){
         const ref = this.matDialog.open(CreatePostDialogComponent, {
             width: '600px',
@@ -46,6 +66,6 @@ export class PostListComponent implements OnInit{
                 this.postListSubject.next(_.cloneDeep(list));
             }
 
-        })
+        });
     }
 }
