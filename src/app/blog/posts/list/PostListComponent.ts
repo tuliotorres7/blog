@@ -8,6 +8,7 @@ import { finalize } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { EditPostDto } from '../services/dataModel/EditPostDto';
 import { ConfirmationDialogComponent } from '../../dialogs/ConfirmationDialogComponent';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
     selector: 'app-post-list',
     templateUrl: 'postList.html',
@@ -23,6 +24,7 @@ export class PostListComponent implements OnInit{
 
 
     constructor(private postService: PostService,
+                private snackBar: MatSnackBar,
                 private matDialog: MatDialog){
     }
     
@@ -57,6 +59,21 @@ export class PostListComponent implements OnInit{
 
     public deletePost(postDto: PostDto){
         const ref= this.matDialog.open(ConfirmationDialogComponent);
+        
+        ref.afterClosed().subscribe((canContinue)=> {
+            if(canContinue){
+                this.isLoading = true;
+                this.postService.deletePost(postDto.id)
+                .pipe(finalize(() => this.isLoading=false))
+                .subscribe(() => {
+                    const list = this.postListSubject.getValue();
+                    _.remove(list,post => post.id === postDto.id);
+                    this.postListSubject.next(_.cloneDeep(list));
+
+                    this.snackBar.open('Post '+ postDto.title +  'has been removed', null,{duration:2500,})
+                });
+            }
+        })
     }
 
     public createPost(){
@@ -69,6 +86,9 @@ export class PostListComponent implements OnInit{
                 const list = this.postListSubject.getValue();
                 list.push(newPost);
                 this.postListSubject.next(_.cloneDeep(list));
+
+
+                this.snackBar.open('Post '+ newPost.title +  'has been created', null,{duration:2500,})
             }
 
         });

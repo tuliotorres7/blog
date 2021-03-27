@@ -6,6 +6,7 @@ import { BlogModule } from './blog/BlogModule';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonMaterialModules } from './common/material/CommonMaterialModules';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import { LoginModule } from './login/LoginModule';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,6 +19,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     //AppRoutingModule,
     BrowserAnimationsModule,
     BlogModule,
+    LoginModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
