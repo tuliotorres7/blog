@@ -4,10 +4,12 @@ import { CommonModule } from '@angular/common';
 import { RouterModule} from '@angular/router';
 import { LoginRoutes } from './LoginRoutes';
 import { CommonMaterialModules } from '../common/material/CommonMaterialModules';
+import { FormsModule } from '@angular/forms';
 @NgModule({
     imports:[
         CommonModule,
         CommonMaterialModules,
+        FormsModule,
         RouterModule.forChild(LoginRoutes)
     ],
     exports: [

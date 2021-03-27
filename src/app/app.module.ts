@@ -8,6 +8,7 @@ import { CommonMaterialModules } from './common/material/CommonMaterialModules';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { LoginModule } from './login/LoginModule';
 import { AppRoutingModule } from './app-routing.module';
+import { AuthModule } from './common/auth/AuthModule';
 @NgModule({
   declarations: [
     AppComponent,
@@ -15,6 +16,7 @@ import { AppRoutingModule } from './app-routing.module';
 
   imports: [
     MatToolbarModule,
+    AuthModule,
     CommonMaterialModules,
     BrowserModule,
     AppRoutingModule,
