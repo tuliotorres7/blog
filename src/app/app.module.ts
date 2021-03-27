@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonMaterialModules } from './common/material/CommonMaterialModules';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { LoginModule } from './login/LoginModule';
+import { AppRoutingModule } from './app-routing.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,7 +17,7 @@ import { LoginModule } from './login/LoginModule';
     MatToolbarModule,
     CommonMaterialModules,
     BrowserModule,
-    //AppRoutingModule,
+    AppRoutingModule,
     BrowserAnimationsModule,
     BlogModule,
     LoginModule,
